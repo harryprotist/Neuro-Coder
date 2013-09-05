@@ -5,7 +5,7 @@ use strict;
 
 sub new
 {
-	my ($type, $in, $out) = @_;
+	my ($type, $out) = @_;
 
 	my $self = {};	
 	$self->{out} = $out;

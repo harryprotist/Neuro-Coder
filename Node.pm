@@ -45,7 +45,7 @@ sub recv
 		$in = \$self->{in_1};
 	}
 
-	if (defined $in) {
+	if (defined $$in) {
 		$self->{dead} = 1;		
 		return 0;
 	} else {

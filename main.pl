@@ -27,9 +27,13 @@ my @node_colors = (
 );
 my @lastclick = ();
 
+my $ticks = 0;
+
 $app->add_event_handler(\&onClick);
 
-$app->add_move_handler(\&onRender);
+$app->add_move_handler(\&onTick);
+
+$app->add_show_handler(\&onRender);
 
 $app->run();
 
@@ -63,6 +67,14 @@ sub onClick
 		}
 	}
 }
+sub onTick
+{
+	if ($ticks >= 50) {
+		$ticks = 0;
+		print "hello world\n";
+	}
+	$ticks++;	
+}
 
 sub addNode
 {
@@ -90,7 +102,8 @@ sub addWire
 	$y1 = $$p1[1]->y + 8;
 	$y2 = $$p2[1]->y + 8;
 
-	my $new_wire = Wire->new();
+	my $new_wire = Wire->new($$p2[0]);
+	$$p1[0]->out1($new_wire);
 
 	my $line = SDLx::Sprite->new(
 		width => $app->w,
